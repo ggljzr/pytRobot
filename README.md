@@ -1,5 +1,5 @@
 # pytRobot
-Interface for controlling simple tread robot (with Raspberry Pi as brain). Robot can be controlled via CLI based commands or web application. Web application uses REST API, which can be used to make other apps.
+Interface for controlling simple tread robot (with [Raspberry Pi](https://www.raspberrypi.org/) as brain). Robot can be controlled via CLI based commands or web application. Web application uses REST API, which can be used to make other apps.
 
 Robot uses Raspberry Pi with [Picoborg](https://www.piborg.org/picoborg) board to controll pair of treads. Motors are powered by two AA batteries, Raspberry Pi is powered via USB by a small powerbank. Robot is also equipped with [camera](https://www.raspberrypi.org/products/camera-module/).
 
