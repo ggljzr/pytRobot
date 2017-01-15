@@ -4,7 +4,7 @@ with open('README.rst') as f:
     long_description = ''.join(f.readlines())
 
 setup(
-    name='pytRobot',
+    name='pytrobot',
     version='0.1.0',
     description='Application for controlling Raspberry Pi based robot',
     long_description=long_description,
@@ -28,7 +28,7 @@ setup(
         'Environment :: Web Environment'
     ],
     entry_points={
-        'console_scripts': ['pytRobot = pytRobot.pytRobot:main', ],
+        'console_scripts': ['pytrobot = pytrobot.pytrobot:main', ],
     },
     install_requires=['Flask>0.10.0', 
                      'click>=6.6', 
