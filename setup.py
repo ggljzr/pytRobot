@@ -30,12 +30,10 @@ setup(
     entry_points={
         'console_scripts': ['pytrobot = pytrobot.pytrobot:main', ],
     },
-    install_requires=['Flask>0.10.0', 
-                     'click>=6.6', 
-                     'Jinja2>=2.8',
-                     'MarkupSafe>=0.23', 
-                     'requests>=2.11.1',
-                     'Werkzeug>=0.11.11',
+    install_requires=[
+                     'click>=6.6',
+		             'RPi.GPIO>=0.6.3',
+                     'picamera>=1.12'
                      ],
     setup_requires=[
         'pytest-runner',
