@@ -33,7 +33,7 @@ def turn(direction, period):
 @click.option('--period', '-p',
 			  help='Motor activation period (seconds)',
 			  default=0.5)
-def forward():
+def forward(period):
     robot.forward(period)
     robot.cleanup()
 
