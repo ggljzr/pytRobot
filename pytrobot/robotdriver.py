@@ -95,5 +95,6 @@ class RobotDriver:
         Calls GPIO.cleanup().
         """
 
+        print('ROBOT: Cleaning up')
         GPIO.cleanup()
 

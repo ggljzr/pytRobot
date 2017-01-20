@@ -8,7 +8,6 @@ class RobotCamera:
 	def __init__(self, resolution=(1024,768)):
 		self.camera = PiCamera()
 		self.camera.resolution = resolution
-		self.camera.start_preview()
 		self.camera.vflip = True
 
 	def capture_img(self, img_path='img.jpg'):

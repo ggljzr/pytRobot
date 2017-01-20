@@ -1,4 +1,5 @@
 import click
+
 from .robotdriver import RobotDriver, DirError
 from .camera import RobotCamera
 from .utils import print_info
@@ -53,3 +54,4 @@ def web():
 
 	app.robot = RobotDriver()
 	app.run(host='raspberrypi.local', debug=True)
+	app.robot.cleanup()

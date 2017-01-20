@@ -1,4 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
+import json
+
+from .utils import sys_info
 
 app = Flask(__name__)
 
@@ -20,6 +23,10 @@ def left():
 def right():
 	app.robot.right()
 	return redirect(url_for('index'))
+
+@app.route('/info')
+def info():
+	return json.dumps(sys_info())
 
 if __name__ == '__main__':
 	app.run()
