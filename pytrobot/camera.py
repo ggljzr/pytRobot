@@ -1,17 +1,31 @@
 from picamera import PiCamera
 
-class RobotCamera:
+def capture_img(img_path='img.jpg', res=(1024,768), vflip=True):
 	"""
-	**Simple interface for PiCamera.**
+	Captures image with PiCamera and saves it to given path.
 	"""
 
-	def __init__(self, resolution=(1024,768)):
-		self.camera = PiCamera()
-		self.camera.resolution = resolution
-		self.camera.vflip = True
+	camera = PiCamera()
+	camera.resolution = res
+	camera.vflip = vflip
 
-	def capture_img(self, img_path='img.jpg'):
-		print('CAMERA: Capturing image...')
-		self.camera.capture(img_path)
-		print('CAMERA: Image saved in {}'.format(img_path))
+	print('CAMERA: Capturing image...')
+	camera.capture(img_path)
+	print('CAMERA: Image saved in {}'.format(img_path))
+
+	camera.close()
+
+def start_stream(res=(640,480), vflip=True):
+	"""
+	Starts mjpg-streamer process.
+	"""
+
+	pass
+
+def stop_stream():
+	"""
+	Stops mjpg-streamer process.
+	"""
+
+	pass
 

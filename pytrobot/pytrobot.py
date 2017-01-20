@@ -1,7 +1,7 @@
 import click
 
 from .robotdriver import RobotDriver, DirError
-from .camera import RobotCamera
+from .camera import capture_img
 from .utils import print_info
 
 @click.group()
@@ -17,9 +17,7 @@ def console():
 			help='Output file (default img.jpg)',
 			default='img.jpg')
 def capture(file):
-	camera = RobotCamera()
-	camera.capture_img(file)
-	camera.camera.close()
+	capture_img(img_path=file)
 
 @console.command(help='Makes a turn in given direction (left/right)')
 @click.argument('direction')
