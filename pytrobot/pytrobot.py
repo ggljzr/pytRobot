@@ -1,18 +1,17 @@
 import click
 from .robotdriver import RobotDriver, DirError
 
-robot = RobotDriver()
-
 @click.group()
 def main():
-    robot.cleanup()
+    pass
 
 @main.group()
 def console():
-    robot.cleanup()
+    pass
 
 @console.command()
 def capture():
+	robot = RobotDriver()
     robot.capture_img()
     robot.cleanup()
 
@@ -22,6 +21,7 @@ def capture():
 			  help='Motor activation period (seconds)', 
 			  default=0.5)
 def turn(direction, period):
+	robot = RobotDriver()
 	try:
 		robot.move(direction, period)
 	except DirError as e:
@@ -34,16 +34,12 @@ def turn(direction, period):
 			  help='Motor activation period (seconds)',
 			  default=0.5)
 def forward(period):
+	robot = RobotDriver()
     robot.forward(period)
     robot.cleanup()
-
-@console.command()
-def cleanup():
-	robot.cleanup()
 
 @main.command()
 def web():
     from .flaskapp import app
 
     app.run(host='raspberrypi.local', debug=True)
-    robot.cleanup()
