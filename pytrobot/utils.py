@@ -5,10 +5,10 @@ import click
 
 def get_interfaces():
 	"""
-	Return list of dicts with available network interfaces and their addresses.
+	Return dict with available network interfaces and their addresses.
 	"""
 
-	interfaces = []
+	interfaces = {}
 
 	for interface in nif.interfaces():
 		new_interface = {}
@@ -23,7 +23,7 @@ def get_interfaces():
 
 		new_interface['hwaddr'] = addrs[nif.AF_LINK][0]['addr']
 
-		interfaces.append(new_interface)
+		interfaces[interface] = new_interface
 
 	return interfaces
 
@@ -73,7 +73,7 @@ def print_info():
 	click.echo('Uptime: {}'.format(info['uptime']))
 
 	click.secho('---Interfaces---', fg='yellow')
-	for interface in info['interfaces']:
-		click.echo(interface['name'])
-		click.echo('	Address: {}'.format(interface['ip']))
-		click.echo('	HW address: {}'.format(interface['hwaddr']))
+	for key, value in info['interfaces'].items():
+		click.echo(key)
+		click.echo('	Address: {}'.format(value['ip']))
+		click.echo('	HW address: {}'.format(value['hwaddr']))
