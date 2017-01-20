@@ -90,6 +90,21 @@ class RobotDriver:
         else:
             raise DirError(direction)
 
+    def move_sequence(self, sequence):
+        """
+        Makes a sequence of moves.
+
+        ``sequence`` -- list of moves to make.
+
+        Each move in sequence is a tuple ('move', period). 
+        Example sequence could look like this:
+        [('forward', 2.8), ('left', 0.4), ('right', 1.0)]         
+        """
+
+        for step in sequence:
+            self.move(step[0], step[1])
+
+
     def cleanup(self):
         """
         Calls GPIO.cleanup().
