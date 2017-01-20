@@ -40,7 +40,7 @@ class RobotDriver:
 
         print('ROBOT: Going forward for {} seconds'.format(period))
         GPIO.output(self.left_motor_pin, GPIO.HIGH)
-        GPIO.output(self.left_motor_pin, GPIO.HIGH)
+        GPIO.output(self.right_motor_pin, GPIO.HIGH)
 
         time.sleep(period)
         self.stop()

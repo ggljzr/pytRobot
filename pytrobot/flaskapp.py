@@ -17,6 +17,7 @@ def left():
 	return redirect(url_for('index'))
 
 @app.route('/right')
+def right():
 	app.robot.right()
 	return redirect(url_for('index'))
 
