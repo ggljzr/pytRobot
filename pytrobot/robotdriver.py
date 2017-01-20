@@ -4,7 +4,7 @@ from picamera import PiCamera
 
 class DirError(Exception):
     def __init__(self, direction):
-        self.message = '{} is not valid direction, has to be left/right'.format(direction)
+        self.message = '{} is not valid direction, has to be left/right/forward'.format(direction)
 
 class RobotDriver:
     def __init__(self, left_motor_pin = 4, right_motor_pin = 7):
@@ -48,8 +48,10 @@ class RobotDriver:
         time.sleep(period)
         self.stop()
 
-    def turn(self, direction, period=0.5):
-        if direction == 'left':
+    def move(self, direction, period=0.5):
+        if direction == 'forward':
+            self.forward(period)
+        elif direction == 'left':
             self.left(period)
         elif direction == 'right':
             self.right(period)

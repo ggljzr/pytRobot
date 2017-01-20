@@ -5,11 +5,11 @@ robot = RobotDriver()
 
 @click.group()
 def main():
-    pass
+    robot.cleanup()
 
 @main.group()
 def console():
-    pass
+    robot.cleanup()
 
 @console.command()
 def capture():
@@ -23,7 +23,7 @@ def capture():
 			  default=0.5)
 def turn(direction, period):
 	try:
-		robot.turn(direction, period)
+		robot.move(direction, period)
 	except DirError as e:
 		print(e.message)
 
