@@ -1,13 +1,14 @@
 import netifaces as nif
 import subprocess as sb
 import os
+import click
 
 def get_interfaces():
 	"""
-	Return dict with available network interfaces and their addresses.
+	Return list of dicts with available network interfaces and their addresses.
 	"""
 
-	interfaces = {}
+	interfaces = []
 
 	for interface in nif.interfaces():
 		new_interface = {}
@@ -20,9 +21,9 @@ def get_interfaces():
 		except KeyError:
 			new_interface['ip'] = 'None'
 
-		new_interface['HW address'] = addrs[nif.AF_LINK][0]['addr']
+		new_interface['hwaddr'] = addrs[nif.AF_LINK][0]['addr']
 
-		interfaces[interface] = new_interface
+		interfaces.append(new_interface)
 
 	return interfaces
 
@@ -58,3 +59,21 @@ def sys_info():
 			'kernel' : info.release,
 			'uptime' : get_uptime(),
 			'interfaces' : get_interfaces()}
+
+def print_info():
+	"""
+	Prints formated and colored system info to stdout.
+	"""
+
+	info = sys_info()
+
+	click.secho('---System Info---', fg='cyan')
+	click.echo('Nodename: {}'.format(info['nodename']))
+	click.echo('OS: {}, (kernel: {})'.format(info['os'], info['kernel']))
+	click.echo('Uptime: {}'.format(info['uptime']))
+
+	click.secho('---Interfaces---', fg='yellow')
+	for interface in info['interfaces']:
+		click.echo(interface['name'])
+		click.echo('	Address: {}'.format(interface['ip']))
+		click.echo('	HW address: {}'.format(interface['hwaddr']))
