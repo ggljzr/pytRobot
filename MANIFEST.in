@@ -1,3 +1,5 @@
 include LICENSE
 
 recursive-include docs *
+recursive-include pytrobot/static *
+recursive-include pytrobot/templates *

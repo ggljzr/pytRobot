@@ -43,5 +43,7 @@ def cleanup():
 
 @main.command()
 def web():
-    print('hello www!!!!')
+    from .flaskapp import app
+
+    app.run(host='raspberrypi.local', debug=True)
     robot.cleanup()

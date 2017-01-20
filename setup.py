@@ -33,7 +33,8 @@ setup(
     install_requires=[
                      'click>=6.6',
 		             'RPi.GPIO>=0.6.3',
-                     'picamera>=1.12'
+                     'picamera>=1.12',
+                     'Flask>=0.12',
                      ],
     setup_requires=[
         'pytest-runner',

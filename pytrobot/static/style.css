@@ -1,0 +1,39 @@
+h1, h2       { color: #61878B; }
+h2.warn {color: #955252;}
+
+div.tweets          { margin: 2em auto; width: 80em; border: none;
+                  padding: 0.8em; background: white; }
+
+div.no_tweets {width: 20em; margin: 2em auto;}
+
+div.tweet {background-color: #f0f0f0; 
+           color: #545454; 
+           padding: 15px; 
+           margin-bottom: 15px;
+           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          }
+div.tweet:hover{background-color: #e9e9e9;}
+
+div.tweet_header {margin-bottom: 10px}
+div.tweet_text {background-color: #fff; padding: 15px; border-style:solid;border-width: 1px; border-color: #CCC;}
+div.tweet_media {margin-top: 10px;}
+
+.tweet_link{color: #7C5971;}
+
+.hashtag{color: #61878B;}
+.mention{color: #679787;}
+
+.user_name{color: #61878B; text-decoration: bold;}
+.screen_name{color: #545454; text-decoration: bold;}
+.created_at{color: #955252;}
+
+a {color: #C49D4E; text-decoration: underline;}
+
+.button {border: None; padding: 10px; color: #fff4e8;} 
+input[type=submit] {background:#679787;}
+input[type=submit]:hover{background: #7CB6A3;}
+
+input[type=text] {border: None; padding: 10px; background: #f0f0f0;}
+
+button#refresh{background: #7A8A5D;}
+button#refresh:hover{background: #A1B67B;}
