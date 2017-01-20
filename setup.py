@@ -35,6 +35,7 @@ setup(
 		             'RPi.GPIO>=0.6.3',
                      'picamera>=1.12',
                      'Flask>=0.12',
+                     'netifaces>=0.10.5',
                      ],
     setup_requires=[
         'pytest-runner',

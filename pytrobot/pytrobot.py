@@ -1,5 +1,6 @@
 import click
 from .robotdriver import RobotDriver, DirError
+from .camera import RobotCamera
 
 @click.group()
 def main():
@@ -11,9 +12,9 @@ def console():
 
 @console.command()
 def capture():
-	robot = RobotDriver()
-    robot.capture_img()
-    robot.cleanup()
+	camera = RobotCamera()
+	camera.capture_img()
+	camera.camera.close()
 
 @console.command()
 @click.argument('direction')
@@ -35,11 +36,12 @@ def turn(direction, period):
 			  default=0.5)
 def forward(period):
 	robot = RobotDriver()
-    robot.forward(period)
-    robot.cleanup()
+	robot.forward(period)
+	robot.cleanup()
 
 @main.command()
 def web():
-    from .flaskapp import app
+	from .flaskapp import app
 
-    app.run(host='raspberrypi.local', debug=True)
+	app.robot = RobotDriver()
+	app.run(host='raspberrypi.local', debug=True)

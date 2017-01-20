@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-from picamera import PiCamera
 
 class DirError(Exception):
     def __init__(self, direction):
@@ -23,12 +22,6 @@ class RobotDriver:
 
         GPIO.setup(self.left_motor_pin, GPIO.OUT)
         GPIO.setup(self.right_motor_pin, GPIO.OUT)
-
-        self.camera = PiCamera()
-        self.camera.resolution = (1024, 768)
-        self.camera.start_preview()
-        self.camera.vflip = True
-        self.camera_warmup = True
             
     def stop(self):
         """
@@ -99,24 +92,8 @@ class RobotDriver:
 
     def cleanup(self):
         """
-        Dealocates camera resources and calls GPIO.cleanup().
+        Calls GPIO.cleanup().
         """
 
         GPIO.cleanup()
-        self.camera.close()
-
-    def capture_img(self, img_path='img.jpg'):
-        """
-        Captures image with PiCamera.
-        """
-
-        if self.camera_warmup:
-            time.sleep(2)
-            self.camera_warmup = False
-
-        print('Capturing image...')
-        self.camera.capture(img_path)
-        print('Image saved in {}'.format(img_path))
-
-
 
