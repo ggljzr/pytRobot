@@ -1,2 +1,5 @@
 [streamer]
-path = /some/path/to/config.ini 
+path = /some/path/to/config.ini
+fps = 25
+resx = 640
+resy = 480

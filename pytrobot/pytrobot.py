@@ -71,7 +71,9 @@ def web(config, stream):
 
 	if stream:
 		cfg = parse_config(config)
-		app.streamer = MjpgStreamer(path=cfg['streamer']['path'])
+		app.streamer = MjpgStreamer(path=cfg['path'],
+									resolution=(cfg['resx'], cfg['resy']),
+									fps=cfg['fps'])
 		app.streamer.start_stream()
 
 	app.robot = RobotDriver()

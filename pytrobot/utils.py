@@ -12,6 +12,9 @@ def parse_config(config_path=DEFAULT_CONFIG):
 
 	try:
 		streamer_path = cfg['streamer']['path']
+		resx = cfg['streamer']['resx']
+		resy = cfg['streamer']['resy']
+		fps = cfg['streamer']['fps']
 	except KeyError as e:
 		print('Config file is missing or containing errors.')
 		if config_path == DEFAULT_CONFIG:
@@ -20,7 +23,7 @@ def parse_config(config_path=DEFAULT_CONFIG):
 		print('KeyError message:')
 		raise e
 
-	return cfg
+	return {'path' : streamer_path, 'resx' : resx, 'resy' : resy, 'fps' : fps}
 
 
 def handled_float(value, default=0):
