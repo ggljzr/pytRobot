@@ -55,10 +55,13 @@ Default location of the ``config.ini`` is ``/etc/xdg/pytrobot/config.ini``.
 
     [streamer]
     path = /path/to/mjpg-streamer
+    fps = 25
+    resx = 640
+    resy = 480
 
 ``path`` should be pointg to the folder with ``mjpg_streamer`` executable. For example if you cloned mjpg streamer from Github to your default home directory, it will be ``/home/pi/mjpg-streamer/mjpg-streamer-experimental``. Note there is no trailing ``/``.
 
-Streamer is used only in web application, so you don't need it for cli mode. If you don't want to install it at all, you can run web application with ``--no-stream`` option. In this case you dont need a config file with path specification.
+Streamer is used only in web application, so you don't need it for cli mode. If you don't want to install it at all, you can run web application with ``--no-stream`` option. In this case you don't need a config file.
 
 Usage
 -----
