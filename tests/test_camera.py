@@ -1,6 +1,7 @@
 import pytrobot.camera as camera
 import os.path
 import subprocess as sb
+import requests
 
 def test_create_img():
 	path = 'test_img.jpg'

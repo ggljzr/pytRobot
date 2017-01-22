@@ -31,5 +31,15 @@ def right():
 def info():
 	return json.dumps(sys_info())
 
+@app.route('/start_stream')
+def start_stream():
+	app.streamer.start_stream()
+	return redirect(url_for('index'))
+
+@app.route('/stop_stream')
+def stop_stream():
+	app.streamer.stop_stream()
+	return redirect(url_for('index'))
+
 if __name__ == '__main__':
 	app.run()

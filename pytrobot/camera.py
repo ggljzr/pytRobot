@@ -25,7 +25,7 @@ class MjpgStreamer:
 	**Interface for controlling mjpg-streamer process**
 	"""
 
-	def __init__(self, path, resolution=(640, 480), fps=25):
+	def __init__(self, path, resolution=(640, 480), fps=25, vflip=True):
 		"""
 		``path`` -- path to mjpg-streamer location. 
 		For example '/home/pi/mjpg-streamer'.
@@ -35,6 +35,7 @@ class MjpgStreamer:
 		self.fps = fps
 		self.path = path
 		self.stream_process = None
+		self.vflip = vflip
 
 	def start_stream(self):
 		"""
@@ -49,7 +50,12 @@ class MjpgStreamer:
 			print("STREAMER: Killing previous stream (PID: {})".format(self.stream_process.pid))
 			self.stream_process.kill()
 
-		input_str = 'input_raspicam.so -x {} -y {} -fps {} -vf'.format(self.resolution[0], self.resolution[1], self.fps)
+		input_str = 'input_raspicam.so -x {} -y {} -fps {}'.format(self.resolution[0], 
+																	self.resolution[1], 
+																	self.fps)
+		if self.vflip == True:
+			input_str += ' -vf'
+
 		output_str = 'output_http.so -w {}/www'.format(self.path)
 
 		plugin_env = os.environ.copy()

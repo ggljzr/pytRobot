@@ -2,6 +2,10 @@ import pytest
 
 import pytrobot.utils as utils
 
+def test_parse_config():
+	with pytest.raises(KeyError) as e:
+		utils.parse_config('/some/fake/config')
+
 def test_handled_float():
 	val = utils.handled_float('123.456')
 	assert val == 123.456

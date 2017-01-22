@@ -2,6 +2,27 @@ import netifaces as nif
 import subprocess as sb
 import os
 import click
+import configparser
+
+DEFAULT_CONFIG = '/etc/xdg/pytrobot/config.ini'
+
+def parse_config(config_path=DEFAULT_CONFIG):
+	cfg = configparser.ConfigParser()
+	cfg.read(config_path)
+
+	try:
+		streamer_path = cfg['streamer']['path']
+	except KeyError as e:
+		print('Config file is missing or containing errors.')
+		if config_path == DEFAULT_CONFIG:
+			print('Default config file should be placed in {}.'.format(DEFAULT_CONFIG))
+			print('Alternatively you could use -c/--config option to specify custom config file.')
+			print('Minimal config should contain path to mjpg-streamer.')
+		print('KeyError message:')
+		raise e
+
+	return cfg
+
 
 def handled_float(value, default=0):
 	"""

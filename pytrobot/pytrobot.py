@@ -2,8 +2,8 @@ import click
 from picamera.exc import PiCameraMMALError
 
 from .robotdriver import RobotDriver, DirError
-from .camera import capture_img
-from .utils import print_info
+from .camera import capture_img, MjpgStreamer
+from .utils import print_info, parse_config, DEFAULT_CONFIG
 
 @click.group()
 def main():
@@ -54,9 +54,18 @@ def info():
 	print_info()
 
 @main.command(help='Runs embedded flask server with web interface')
-def web():
+@click.option('--config', '-c',
+			help='/path/to/config/file.ini',
+			default=DEFAULT_CONFIG)
+def web(config):
 	from .flaskapp import app
 
+	print('Starting web app...')
+	print('Config: {}'.format(config))
+	cfg = parse_config(config)
+
 	app.robot = RobotDriver()
+	app.streamer = MjpgStreamer(path=cfg['streamer']['path'])
 	app.run(host='raspberrypi.local', debug=True)
 	app.robot.cleanup()
+	app.streamer.stop_stream()
