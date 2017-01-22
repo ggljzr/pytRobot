@@ -1,4 +1,5 @@
 import click
+from picamera.exc import PiCameraMMALError
 
 from .robotdriver import RobotDriver, DirError
 from .camera import capture_img
@@ -17,7 +18,13 @@ def console():
 			help='Output file (default img.jpg)',
 			default='img.jpg')
 def capture(file):
-	capture_img(img_path=file)
+	try:
+		capture_img(img_path=file)
+	except PiCameraMMALError as e:
+		print('Failed to alocate camera resources.')
+		print('Perhaps camera is used by mjpg-streamer.')
+		print('PiCameraMMALError message:')
+		print(str(e))
 
 @console.command(help='Makes a turn in given direction (left/right)')
 @click.argument('direction')

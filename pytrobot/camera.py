@@ -4,8 +4,8 @@ def capture_img(img_path='img.jpg', res=(1024,768), vflip=True):
 	"""
 	Captures image with PiCamera and saves it to given path.
 	"""
-
 	camera = PiCamera()
+
 	camera.resolution = res
 	camera.vflip = vflip
 
