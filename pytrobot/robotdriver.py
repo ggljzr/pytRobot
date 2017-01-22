@@ -7,7 +7,7 @@ class DirError(Exception):
 
 class RobotDriver:
     """
-    **Class for accessing robot motors and camera**
+    **Class for accessing robot motors**
     """
 
     def __init__(self, left_motor_pin = 4, right_motor_pin = 7):
