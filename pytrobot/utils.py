@@ -17,7 +17,6 @@ def parse_config(config_path=DEFAULT_CONFIG):
 		if config_path == DEFAULT_CONFIG:
 			print('Default config file should be placed in {}.'.format(DEFAULT_CONFIG))
 			print('Alternatively you could use -c/--config option to specify custom config file.')
-			print('Minimal config should contain path to mjpg-streamer.')
 		print('KeyError message:')
 		raise e
 

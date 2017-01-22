@@ -67,10 +67,12 @@ def web(config, stream):
 	print('Config: {}'.format(config))
 
 	app.streamer = None
+	app.is_stream = stream
 
 	if stream:
 		cfg = parse_config(config)
 		app.streamer = MjpgStreamer(path=cfg['streamer']['path'])
+		app.streamer.start_stream()
 
 	app.robot = RobotDriver()
 	app.run(host='raspberrypi.local', debug=True)

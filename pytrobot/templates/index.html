@@ -1,16 +1,32 @@
 <!doctype html>
 <head>
+	<title>pytRobot</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<h1>Hello world</h1>
+<h1>pytRobot</h1>
 
-<a href='/forward'>Forward</a>
-<a href='/left'>Left</a>
-<a href='/right'>Right</a>
+{% if is_stream %}
+<div class='stream-img'>
+	<img src="http://raspberrypi.local:8080/?action=stream" />
+</div>
+{% endif %}
 
-<img src="http://raspberrypi.local:8080/?action=stream" />
+<div>
+	<span class='directions'>
+		<a href='/left'>Left</a>
+		<a href='/forward'>Forward</a>
+		<a href='/right'>Right</a>
+	</span>
+</div>
+
+<div>
+	<span>
+		<a href='/start_stream'>Start stream</a>
+		<a href='/stop_stream'>Stop stream</a>
+	</span>	
+<div>
 
 </body>
