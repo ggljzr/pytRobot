@@ -3,6 +3,20 @@ import subprocess as sb
 import os
 import click
 
+def handled_float(value, default=0):
+	"""
+	Returns ``float(value)`` if value is parseable by ``float()``.
+	Otherwise returns ``default``. 
+	"""
+	ret_val = default
+
+	try:
+		ret_val = float(value)
+	except (TypeError, ValueError):
+		pass
+
+	return ret_val
+
 def get_interfaces():
 	"""
 	Return dict with available network interfaces and their addresses.

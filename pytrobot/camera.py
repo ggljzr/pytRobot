@@ -3,6 +3,9 @@ from picamera import PiCamera
 def capture_img(img_path='img.jpg', res=(1024,768), vflip=True):
 	"""
 	Captures image with PiCamera and saves it to given path.
+	It cannot be used when camera is active 
+	(for example when it is used by mjpg-streamer). In that case
+	exception ``PiCameraMMALError`` will be raised.
 	"""
 	camera = PiCamera()
 
@@ -15,17 +18,5 @@ def capture_img(img_path='img.jpg', res=(1024,768), vflip=True):
 
 	camera.close()
 
-def start_stream(res=(640,480), vflip=True):
-	"""
-	Starts mjpg-streamer process.
-	"""
-
+class MjpgStreamer:
 	pass
-
-def stop_stream():
-	"""
-	Stops mjpg-streamer process.
-	"""
-
-	pass
-

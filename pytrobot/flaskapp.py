@@ -1,7 +1,7 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 import json
 
-from .utils import sys_info
+from .utils import sys_info, handled_float
 
 app = Flask(__name__)
 
@@ -11,17 +11,20 @@ def index():
 
 @app.route('/forward')
 def forward():
-	app.robot.forward()
+	period = handled_float(request.args.get('per'), 0.5)
+	app.robot.forward(period)
 	return redirect(url_for('index'))
 
 @app.route('/left')
 def left():
-	app.robot.left()
+	period = handled_float(request.args.get('per'), 0.5)
+	app.robot.left(period)
 	return redirect(url_for('index'))
 
 @app.route('/right')
 def right():
-	app.robot.right()
+	period = handled_float(request.args.get('per'), 0.5)
+	app.robot.right(period)
 	return redirect(url_for('index'))
 
 @app.route('/info')
