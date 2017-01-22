@@ -57,15 +57,24 @@ def info():
 @click.option('--config', '-c',
 			help='/path/to/config/file.ini',
 			default=DEFAULT_CONFIG)
-def web(config):
+@click.option('--stream/--no-stream',
+			help='Use mjpg-streamer to stream video feed?',
+			default=True)
+def web(config, stream):
 	from .flaskapp import app
 
 	print('Starting web app...')
 	print('Config: {}'.format(config))
-	cfg = parse_config(config)
+
+	app.streamer = None
+
+	if stream:
+		cfg = parse_config(config)
+		app.streamer = MjpgStreamer(path=cfg['streamer']['path'])
 
 	app.robot = RobotDriver()
-	app.streamer = MjpgStreamer(path=cfg['streamer']['path'])
 	app.run(host='raspberrypi.local', debug=True)
+
 	app.robot.cleanup()
-	app.streamer.stop_stream()
+	if stream:
+		app.streamer.stop_stream()
