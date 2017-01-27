@@ -8,25 +8,50 @@
 
 <h1>pytRobot</h1>
 
-{% if is_stream %}
-<div class='stream-img'>
-	<img src="http://raspberrypi.local:8080/?action=stream" />
+<div class='stream'>
+	{% if is_stream %}
+	<div class='stream_img'>
+		<img src="http://raspberrypi.local:8080/?action=stream" />
+	</div>
+	{% else %}
+	<div class='stream_img'>
+		<img src="{{ url_for('static', filename='nostream.png') }}" />
+	</div>
+	{% endif %}
+
+	<div class='controls'>
+		<div class='dir_div'>
+			<span class='directions'>
+				<a class='dir_button' href='/left'>Left</a>
+				<a class='dir_button' href='/forward'>Forward</a>
+				<a class='dir_button' href='/right'>Right</a>
+			</span>
+		</div>
+
+		<div class='stream_div'>
+			<span>
+				<a class='stream_on' href='/start_stream'>Start stream</a>
+				<a class='stream_off' href='/stop_stream'>Stop stream</a>
+			</span>	
+		</div>
+	</div>
 </div>
-{% endif %}
 
-<div>
-	<span class='directions'>
-		<a href='/left'>Left</a>
-		<a href='/forward'>Forward</a>
-		<a href='/right'>Right</a>
-	</span>
+<div class='sys_info'>
+	<h3> Nodename: {{ sys_info.nodename }} </h3>
+	<span> OS: {{ sys_info.os }} (kernel: {{ sys_info.kernel }}) </span>
+	<span>Uptime: {{ sys_info.uptime }} </span>
+
+	{% if sys_info.interfaces | length > 0 %}
+	<h3>Interfaces</h3>
+
+	{% for key, value in sys_info.interfaces.items() %}
+	<div class='interface'>
+		<h4> {{ key }}</h4>
+		<span> IP: {{ value.ip }} </span>
+		<span> HWaddr: {{ value.hwaddr }}</span>
+	</div>
+	{% endfor %}
+	{% endif %}
 </div>
-
-<div>
-	<span>
-		<a href='/start_stream'>Start stream</a>
-		<a href='/stop_stream'>Stop stream</a>
-	</span>	
-<div>
-
 </body>

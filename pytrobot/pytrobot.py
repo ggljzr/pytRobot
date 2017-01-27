@@ -63,6 +63,15 @@ def info():
 def web(config, stream):
 	from .flaskapp import app
 
+	try:
+		app.robot = RobotDriver()
+	except RuntimeError as e:
+		print("ROBOT: Got runtime error when initializing robot.")
+		print("ROBOT: Are you running this as root?")
+		print("Error message:")
+		print(str(e))
+		return
+
 	print('Starting web app...')
 	print('Config: {}'.format(config))
 
@@ -76,7 +85,6 @@ def web(config, stream):
 									fps=cfg['fps'])
 		app.streamer.start_stream()
 
-	app.robot = RobotDriver()
 	app.run(host='raspberrypi.local', debug=True)
 
 	app.robot.cleanup()
