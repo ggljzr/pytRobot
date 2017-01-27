@@ -1,4 +1,7 @@
-h1, h2 {color: #1565C0;}
+h1, h2, h3 {color: #1565C0;}
+h4 {color: #00796b;}
+
+body{background-color: #e3f2fd;}
 
 div.stream
 {
@@ -6,17 +9,33 @@ div.stream
 	float: left;	
 }
 
+div.sys_info, div.controls{
+	border: solid 4px #666;
+}
+
 div.controls {
 	background-color: #f0f0f0;
 	color: #545454;
-	margin: 15px;
+	padding: 15px;
+	padding-bottom: 35px;
 }
 
 div.dir_div
 {
+	float:left;
+}
+
+div.stream_div
+{
+	float:right;
+}
+
+div.sys_info
+{
+	margin-left: 10px;
 	padding: 15px;
-	margin-bottom: 15px;
-	display: block;
+	background-color: #f0f0f0;
+	display: inline-block;
 }
 
 .dir_button

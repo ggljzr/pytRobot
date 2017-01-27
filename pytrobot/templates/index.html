@@ -40,6 +40,7 @@
 <div class='sys_info'>
 	<h3> Nodename: {{ sys_info.nodename }} </h3>
 	<span> OS: {{ sys_info.os }} (kernel: {{ sys_info.kernel }}) </span>
+	<br>
 	<span>Uptime: {{ sys_info.uptime }} </span>
 
 	{% if sys_info.interfaces | length > 0 %}
@@ -47,7 +48,7 @@
 
 	{% for key, value in sys_info.interfaces.items() %}
 	<div class='interface'>
-		<h4> {{ key }}</h4>
+		<h4>{{ key }}:</h4>
 		<span> IP: {{ value.ip }} </span>
 		<span> HWaddr: {{ value.hwaddr }}</span>
 	</div>
