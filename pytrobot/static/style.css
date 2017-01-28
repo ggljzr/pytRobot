@@ -9,13 +9,21 @@ div.stream
 	float: left;	
 }
 
-div.sys_info, div.controls{
+div.sys_info, div.controls, div.flashes{
 	border: solid 4px #666;
+	background-color: #f0f0f0;
+	color:#545454;
+}
+
+div.flashes
+{
+	margin-bottom: 5px;
+	padding: 15px;
+	text-align: center;
+	padding: 5px;
 }
 
 div.controls {
-	background-color: #f0f0f0;
-	color: #545454;
 	padding: 15px;
 	padding-bottom: 35px;
 }
@@ -34,7 +42,6 @@ div.sys_info
 {
 	margin-left: 10px;
 	padding: 15px;
-	background-color: #f0f0f0;
 	display: inline-block;
 }
 

@@ -1,9 +1,11 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash, abort
 import json
 
+from .robotdriver import DirError
 from .utils import sys_info, handled_float
 
 app = Flask(__name__)
+app.secret_key = 'some_secret'
 
 @app.route('/')
 def index():
@@ -12,22 +14,15 @@ def index():
 							is_stream=app.is_stream,
 							sys_info=sinfo)
 
-@app.route('/forward')
-def forward():
-	period = handled_float(request.args.get('per'), 0.5)
-	app.robot.forward(period)
-	return redirect(url_for('index'))
+@app.route('/move/<direction>/')
+@app.route('/move/<direction>/<period>')
+def move(direction, period=0.5):
+	try:
+		app.robot.move(direction, float(period))
+	except (DirError, TypeError, ValueError):
+		abort(406)
 
-@app.route('/left')
-def left():
-	period = handled_float(request.args.get('per'), 0.5)
-	app.robot.left(period)
-	return redirect(url_for('index'))
-
-@app.route('/right')
-def right():
-	period = handled_float(request.args.get('per'), 0.5)
-	app.robot.right(period)
+	flash('Moving {} for {}s'.format(direction, period))
 	return redirect(url_for('index'))
 
 @app.route('/info')
@@ -39,6 +34,9 @@ def start_stream():
 	if app.streamer is not None:
 		app.streamer.start_stream()
 		app.is_stream = True
+		flash('Starting stream')
+	else:
+		flash('Runing in --no-stream mode')
 	return redirect(url_for('index'))
 
 @app.route('/stop_stream')
@@ -46,6 +44,9 @@ def stop_stream():
 	if app.streamer is not None:
 		app.streamer.stop_stream()
 		app.is_stream = False
+		flash('Stopping stream')
+	else:
+		flash('Runing in --no-stream mode')
 	return redirect(url_for('index'))
 
 if __name__ == '__main__':

@@ -19,12 +19,22 @@
 	</div>
 	{% endif %}
 
+	{% with messages = get_flashed_messages() %}
+  		{% if messages %}
+    	<div class='flashes'>
+    		{% for message in messages %}
+      			{{ message }}
+    		{% endfor %}
+		</div>
+  		{% endif %}
+	{% endwith %}
+
 	<div class='controls'>
 		<div class='dir_div'>
 			<span class='directions'>
-				<a class='dir_button' href='/left'>Left</a>
-				<a class='dir_button' href='/forward'>Forward</a>
-				<a class='dir_button' href='/right'>Right</a>
+				<a class='dir_button' href='/move/left/'>Left</a>
+				<a class='dir_button' href='/move/forward/'>Forward</a>
+				<a class='dir_button' href='/move/right/'>Right</a>
 			</span>
 		</div>
 
