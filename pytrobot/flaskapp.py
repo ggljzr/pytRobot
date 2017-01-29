@@ -56,11 +56,13 @@ def stop_stream():
 
 @app.route('/capture/')
 @app.route('/capture/<vflip>/')
-def capture(vflip=True):
+def capture(vflip='true'):
 	filename = '/tmp/{}.jpg'.format(str(datetime.now()))
 
+	bvflip = vflip in ['true', '1']
+
 	try:
-		capture_img(filename, vflip=bool(vflip))
+		capture_img(filename, vflip=bvflip)
 	except PiCameraMMALError:
 		abort(503)
 
