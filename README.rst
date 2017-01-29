@@ -12,6 +12,13 @@ treads. Motors are powered by two AA batteries, Raspberry Pi is powered
 via USB by a small powerbank. Robot is also equipped with
 `camera <https://www.raspberrypi.org/products/camera-module/>`__.
 
+** Somewhat important note about vertical flip: **
+This project can be used with any generic robot controlled via Raspberry Pi (since all you need is two pins connected to motors and a camera). 
+
+However due to construction of the robot I used to implement and test this project, camera input is vertically fliped by default (when capturing images or streaming video).
+
+If you want to alternate this behavior, you have to set appropriate parameters (when capturing still images via cli application or REST API) and/or set ``vflip`` flag in ``config.ini`` (for streaming video).
+
 Requirements
 ------------
 
@@ -58,6 +65,7 @@ Default location of the ``config.ini`` is ``/etc/xdg/pytrobot/config.ini``.
     fps = 25
     resx = 640
     resy = 480
+    vflip = 1
 
 ``path`` should be pointg to the folder with ``mjpg_streamer`` executable. For example if you cloned mjpg streamer from Github to your default home directory, it will be ``/home/pi/mjpg-streamer/mjpg-streamer-experimental``. Note there is no trailing ``/``.
 
@@ -78,7 +86,7 @@ connecting to Raspberry Pi via SSH.
 
 ::
 
-    # 90 deg turn to the left 
+    # turn to the left 
     $ sudo pyrobot turn left
     # take a shot with the camera
     $ sudo pyrobot capture img.jpg
@@ -94,12 +102,12 @@ Other important role of web application is to provide REST API.
 
 ::
 
-	#run web app with default config
-	$ sudo pytrobot web
+    #run web app with default config.ini
+    $ sudo pytrobot web
     #run web app without stream (no mjpg-streamer required)
     $ sudo pytrobot web --no-stream
 
-Web application will then be available at `<raspberrypi.local:5000>`.
+Web application will then be available at `raspberrypi.local:5000 <http://raspberrypi.local:5000>`__.
 
 Note that this application is not really meant to be used at public networks, since everything (including video stream) is available to anyone connected.
 
