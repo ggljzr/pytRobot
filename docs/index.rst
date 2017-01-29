@@ -12,6 +12,7 @@ Welcome to pytRobot's documentation!
 
    readme_link
    modules
+   api
 
 Indices and tables
 ==================
