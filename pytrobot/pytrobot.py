@@ -17,9 +17,12 @@ def console():
 @click.option('--file', '-f',
 			help='Output file (default img.jpg)',
 			default='img.jpg')
-def capture(file):
+@click.option('--flip/--no-flip',
+			help="Vertically flip image",
+			default=True)
+def capture(file, flip):
 	try:
-		capture_img(img_path=file)
+		capture_img(img_path=file, vflip=flip)
 	except PiCameraMMALError as e:
 		print('Failed to alocate camera resources.')
 		print('Perhaps camera is used by mjpg-streamer.')
@@ -82,7 +85,7 @@ def web(config, stream):
 		cfg = parse_config(config)
 		app.streamer = MjpgStreamer(path=cfg['path'],
 									resolution=(cfg['resx'], cfg['resy']),
-									fps=cfg['fps'])
+									fps=cfg['fps'], vflip=cfg['vflip'])
 		app.streamer.start_stream()
 
 	app.run(host='raspberrypi.local', debug=True)
