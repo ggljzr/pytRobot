@@ -36,7 +36,7 @@ You can get this package directly from github:
 
     $ git clone https://github.com/ggljzr/pytrobot
     $ cd pytrobot
-    $ python3.5 setup.py install
+    $ sudo python3.5 setup.py install
 
 If you want to use application with `mjpg streamer <https://github.com/jacksonliam/mjpg-streamer>`__, you have to compile it, and then create ``config.ini`` file specifying its location.
 
@@ -96,4 +96,53 @@ Other important role of web application is to provide REST API.
 
 	#run web app with default config
 	$ sudo pytrobot web
+    #run web app without stream (no mjpg-streamer required)
+    $ sudo pytrobot web --no-stream
+
+Web application will then be available at `<raspberrypi.local:5000>`.
+
+Note that this application is not really meant to be used at public networks, since everything (including video stream) is available to anyone connected.
+
+API is described in package documentation.
+
+Tests
+-----
+
+Package comes with a set of basic unit tests. You can run tests with following commands (you have to run them as root due to GPIO modules):
+
+::
+
+    sudo python3.5 setup.py test
+    #or if you have already installed pytest
+    sudo pytest tests #note this is the only way to pass arguments to tests
+
+These tests do not require ``config.ini`` in place and mjpg streamer installed.
+
+Test requirements
+~~~~~~~~~~~~~~~~~
+
+Only requirement is ``pytest`` module. It will be collected automaticly when running ``sudo python3.5 setup.py test``.
+
+If you want to run tests with ``pytest`` command, you have to install ``pytest`` module with ``sudo python3.5 -m pip install pytest``.
+
+Documentation
+-------------
+
+You can generate project documentation with `Sphinx <http://www.sphinx-doc.org/en/1.4.8/>`__. First make sure it is installed:
+
+::
+    
+    #this only install Sphinx, since it is the only dependency
+    $ sudo pip install -r docs/requirements.txt
+
+Then you can run ``make`` to generate html docs:
+
+::
+    
+    #this will create html documentation in docs/_build/html
+    $ cd docs
+    $ make html 
+
+To make sure Sphinx generate all documentation from docstrings correctly, you have to install the package (e.g. ``sudo python3.5 setup.py install``) first.
+
 
