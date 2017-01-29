@@ -1,8 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort
 import json
 
 from .robotdriver import DirError
-from .utils import sys_info, handled_float
+from .utils import sys_info
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
