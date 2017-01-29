@@ -26,3 +26,22 @@ def test_info_json(testapp):
 	assert 'nodename' in info_data
 
 	assert 'lo' in info_data['interfaces']
+
+def test_move_redirect(testapp):
+	req = testapp.get('/move/forward/1')
+	data = req.data.decode('utf-8')
+
+	assert req.status_code == 302
+
+def test_move_invalid(testapp):
+	#with implicit value is correct
+	req = testapp.get('/move/forward/')
+	assert req.status_code == 302
+
+	#invalid direction
+	req = testapp.get('/move/alt-righty-right/1')
+	assert req.status_code == 406
+
+	#invalid time period
+	req = testapp.get('/move/left/not-floaty-float')
+	assert req.status_code == 406
