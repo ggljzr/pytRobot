@@ -19,7 +19,7 @@ def test_no_stream(testapp):
 	assert 'nostream' in testapp.get('/').data.decode('utf-8')
 
 def test_info_json(testapp):
-	info_data = testapp.get('/info').data.decode('utf-8')
+	info_data = testapp.get('/info/').data.decode('utf-8')
 	info_data = json.loads(info_data)
 
 	assert 'interfaces' in info_data
@@ -28,7 +28,7 @@ def test_info_json(testapp):
 	assert 'lo' in info_data['interfaces']
 
 def test_move_redirect(testapp):
-	req = testapp.get('/move/forward/1')
+	req = testapp.get('/move/forward/1/')
 	data = req.data.decode('utf-8')
 
 	assert req.status_code == 302
@@ -39,9 +39,11 @@ def test_move_invalid(testapp):
 	assert req.status_code == 302
 
 	#invalid direction
-	req = testapp.get('/move/alt-righty-right/1')
+	req = testapp.get('/move/alt-righty-right/1/')
 	assert req.status_code == 406
 
 	#invalid time period
-	req = testapp.get('/move/left/not-floaty-float')
+	req = testapp.get('/move/left/not-floaty-float/')
 	assert req.status_code == 406
+
+
