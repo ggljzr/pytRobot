@@ -64,7 +64,8 @@ def capture(vflip='true'):
 	try:
 		capture_img(filename, vflip=bvflip)
 	except PiCameraMMALError:
-		abort(503)
+		print('CAMERA: Streaming in prgoress, redirecting to snapshot...')
+		return redirect('http://raspberrypi.local:8080/?action=snapshot')
 
 	return send_file(filename, mimetype='image/jpg')
 

@@ -73,4 +73,6 @@ Default value is ``True``, values ``1``, ``true`` will be resolved as ``True``, 
 
 This command returns captured image in ``.jpg`` format. Image is saved on Raspberry Pi in ``/tmp`` with timestamp as file name and then send to the client. Command returns status code 200 if everything goes well.
 
-If application fails to allocate resources (typically because camera is in use for streaming), command will return status code 503.
+This command uses ``capture_img()`` function from ``camera`` module by default. If this function cannot be used because of active streaming (via mjpg streamer), command simply redirects to current stream snapshot on `http://raspberrypi.local:8080/?action=snapshot`.
+
+Note that this snapshot is directly from mjpg streamer and therefore uses settings specified in ``config.ini``, so ``<vflip>`` parameter is disregarded in this case. 
