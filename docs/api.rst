@@ -23,6 +23,10 @@ Unsuccessful move command can be caused either by invalid direction (not ``left`
 System info
 -----------
 
+::
+
+	/info/
+
 Returns system info in a json with following format (example):
 
 ::
