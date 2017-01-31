@@ -6,6 +6,9 @@ Pi <https://www.raspberrypi.org/>`__ as brain). Robot can be controlled
 via CLI based commands or web application. Web application uses REST
 API, which can be used to make other apps.
 
+
+.. figure:: docs/_static/robot.jpg
+
 Robot uses Raspberry Pi with
 `Picoborg <https://www.piborg.org/picoborg>`__ board to controll pair of
 treads. Motors are powered by two AA batteries, Raspberry Pi is powered
@@ -22,7 +25,7 @@ If you want to alternate this behavior, you have to set appropriate parameters (
 Requirements
 ------------
 
-- Python3.5
+- Python3.5 *
 - click
 - Flask
 - RPi.GPIO
@@ -33,6 +36,8 @@ These are requirements that can be installed via ``pip`` package manager. Web ap
 Streamer is a standalone program, and path to it has to be specified in ``config.ini`` file (more `here <#Installation>`__).
 
 Alternatively you can run web app without video stream.
+
+(* Note that Python 3.5 is not in Raspbian repository, so you probably have to `build <http://raspberrypi.stackexchange.com/questions/54365/how-to-download-and-install-python-3-5-in-raspbian>`__ it from source.)
 
 Installation
 ------------
