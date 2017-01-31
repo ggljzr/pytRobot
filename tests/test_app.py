@@ -1,5 +1,6 @@
 import pytest
 import json
+import imghdr
 
 from pytrobot.robotdriver import RobotDriver, DirError
 
@@ -45,5 +46,13 @@ def test_move_invalid(testapp):
 	#invalid time period
 	req = testapp.get('/move/left/not-floaty-float/')
 	assert req.status_code == 406
+
+#this test capture command with capture_img() function
+#since no streamer is present
+def test_capture(testapp):
+	req = testapp.get('/capture/')
+	assert req.status_code == 200
+	assert imghdr.what(None, h=req.data) == 'jpeg'
+
 
 
