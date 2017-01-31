@@ -65,7 +65,7 @@ def info():
 			default=True)
 @click.option('--debug/--no-debug',
 			help='Run flask server in debug mode?',
-			'default'=False)
+			default=False)
 def web(config, stream, debug):
 	from .flaskapp import app
 
