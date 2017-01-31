@@ -63,7 +63,10 @@ def info():
 @click.option('--stream/--no-stream',
 			help='Use mjpg-streamer to stream video feed?',
 			default=True)
-def web(config, stream):
+@click.option('--debug/--no-debug',
+			help='Run flask server in debug mode?',
+			'default'=False)
+def web(config, stream, debug):
 	from .flaskapp import app
 
 	try:
@@ -88,7 +91,7 @@ def web(config, stream):
 									fps=cfg['fps'], vflip=cfg['vflip'])
 		app.streamer.start_stream()
 
-	app.run(host='raspberrypi.local', debug=True)
+	app.run(host='raspberrypi.local', debug=debug)
 
 	app.robot.cleanup()
 	if stream:
