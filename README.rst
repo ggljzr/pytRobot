@@ -92,9 +92,9 @@ connecting to Raspberry Pi via SSH.
 ::
 
     # turn to the left 
-    $ sudo pyrobot turn left
+    $ sudo pytrobot turn left
     # take a shot with the camera
-    $ sudo pyrobot capture img.jpg
+    $ sudo pytrobot capture img.jpg
 
 Web Application
 ~~~~~~~~~~~~~~~
